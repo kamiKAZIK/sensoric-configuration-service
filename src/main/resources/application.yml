@@ -1,0 +1,33 @@
+server:
+  port: 38888
+
+management:
+  endpoint:
+    health:
+      show-details: when-authorized
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: plerion:/plerion/configuration-settings.git
+
+sensoric:
+  security:
+    user:
+      name: configuration-user
+      roles: USER
+    manager:
+      name: configuration-manager
+      roles: ACTUATOR
+---
+spring:
+  profiles: local
+
+plerion:
+  security:
+    user:
+      password:
+    manager:
+      password:
