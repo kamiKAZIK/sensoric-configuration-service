@@ -16,8 +16,6 @@ sensoric:
     manager:
       name: configuration-manager
       roles: ACTUATOR
-
-spring.cloud.config.server.encrypt.enabled: true
 ---
 spring:
   profiles: local
