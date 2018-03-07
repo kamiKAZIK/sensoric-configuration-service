@@ -2,6 +2,9 @@ package com.sensoric.configuration.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.Arrays;
+import java.util.List;
+
 @ConfigurationProperties(prefix = "sensoric.security")
 public class SecurityProperties {
     private UserProperties user;
@@ -21,6 +24,10 @@ public class SecurityProperties {
 
     public UserProperties getManager() {
         return manager;
+    }
+
+    public List<UserProperties> getUsers() {
+        return Arrays.asList(user, manager);
     }
 
     public static final class UserProperties {

@@ -19,7 +19,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf()
+                .disable()
+                .authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint())
                 .hasRole(ROLE_ACTUATOR)
                 .anyRequest()
@@ -31,8 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService(SecurityProperties properties) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(build(properties.getUser()));
-        manager.createUser(build(properties.getManager()));
+        properties.getUsers()
+                .stream()
+                .map(this::build)
+                .forEach(u -> manager.createUser(u));
 
         return manager;
     }
