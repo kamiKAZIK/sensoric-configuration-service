@@ -1,3 +1,5 @@
+debug: true
+
 server:
   port: 38888
 
@@ -5,13 +7,6 @@ management:
   endpoint:
     health:
       show-details: when-authorized
-
-spring:
-  cloud:
-    config:
-      server:
-        git:
-          uri: plerion:/plerion/configuration-settings.git
 
 sensoric:
   security:
@@ -21,13 +16,20 @@ sensoric:
     manager:
       name: configuration-manager
       roles: ACTUATOR
+
+spring.cloud.config.server.encrypt.enabled: true
 ---
 spring:
   profiles: local
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/kamiKAZIK/sensoric-settings.git
 
-plerion:
+sensoric:
   security:
     user:
-      password:
+      password: '{noop}configuration-user'
     manager:
-      password:
+      password: '{noop}configuration-manager'

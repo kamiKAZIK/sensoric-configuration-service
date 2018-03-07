@@ -1,9 +1,5 @@
 spring:
-  application:
-    name: sensoric-configuration-service
----
-spring:
   profiles: local
 
 encrypt:
-  key:
+  key: 'symetric-key'

@@ -1,4 +1,11 @@
-# docker run --name sensoric-configuration-service -p38888:38888 -v$HOME/.ssh:/root/.ssh -it -d com.sensoric/sensoric-configuration-service --spring.profiles.active=???
+# docker run --name sensoric-configuration-service -p38888:38888 \
+    -v$HOME/git/kami/sensoric/encrypt:/usr/local/applications/encrypt \
+    -it -d com.sensoric/sensoric-configuration-service \
+    --spring.profiles.active=??? \
+    --encrypt.key-store.location=??? \
+    --encrypt.key-store.password=??? \
+    --encrypt.key-store.alias=??? \
+    --encrypt.key-store.secret=???
 
 FROM java:alpine
 RUN mkdir -p /usr/local/applications && \
@@ -7,4 +14,4 @@ WORKDIR /usr/local/applications
 ARG JAR_FILE
 ADD ${JAR_FILE} sensoric-configuration-service.jar
 EXPOSE 38888
-ENTRYPOINT ["java", "-jar", "-Xmx64m", "-Xss512k", "sensoric-configuration-service.jar"]
+ENTRYPOINT ["java", "-jar", "-Xmx32m", "-Xss256k", "sensoric-configuration-service.jar"]
