@@ -14,14 +14,16 @@ sensoric:
     manager:
       name: configuration-manager
       roles: ACTUATOR
----
+
 spring:
-  profiles: local
   cloud:
     config:
       server:
         git:
           uri: https://github.com/kamiKAZIK/sensoric-settings.git
+---
+spring:
+  profiles: local
 
 sensoric:
   security:
