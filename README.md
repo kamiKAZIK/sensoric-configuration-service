@@ -1,10 +1,13 @@
 # sensoric-configuration-service
 
+Sensoric Configuration Service is a small configuration profider based on Spring Cloud Config.
+For production deployments encryption must be used in order to protect sensitive configuration values.
+
 keytool -genkeypair -alias sensoric-configuration-service \
        -keyalg RSA -keysize 4096 -sigalg SHA512withRSA \
        -dname 'CN=Sensoric Configuration Service,OU=Sensoric,O=Sensoric' \
-       -keypass ************ -keystore sensoric-configuration-service.jks \
-       -storepass ************
+       -keypass '************' -keystore sensoric-configuration-service.jks \
+       -storepass '************'
 
 docker run --name sensoric-configuration-service -p38888:38888 \
     -v$HOME/git/kami/sensoric/encrypt:/usr/local/applications/encrypt \
