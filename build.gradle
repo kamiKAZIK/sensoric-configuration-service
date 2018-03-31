@@ -30,12 +30,6 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-config-server'
 }
 
-bootJar {
-    launchScript {
-        properties 'logFilename': "${jar.baseName}.log"
-    }
-}
-
 springBoot {
     buildInfo()
 }
