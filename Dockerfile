@@ -8,5 +8,7 @@ RUN mkdir -p /usr/local/applications \
 WORKDIR /usr/local/applications
 COPY ${JAR_FILE} ${ARTIFACT_NAME}
 EXPOSE 38888
-ENTRYPOINT java $JAVA_OPTS -jar $ARTIFACT_NAME $@
-
+ENTRYPOINT java $JAVA_OPTS -jar $ARTIFACT_NAME \
+    --encrypt.key-store.password="$(cat $KEYSTORE_PASSWORD_FILE)" \
+    --encrypt.key-store.secret="$(cat $KEYSTORE_SECRET_FILE)" \
+    $@
