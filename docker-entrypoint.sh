@@ -29,11 +29,27 @@ else
 fi
 
 file_env 'KEYSTORE_SECRET'
-if [ -z "KEYSTORE_SECRET" ]; then
+if [ -z "$KEYSTORE_SECRET" ]; then
     echo >&2 '  You need to specify KEYSTORE_SECRET'
     exit 1
 else
     set -- "--encrypt.key-store.secret=$KEYSTORE_SECRET" "$@"
+fi
+
+file_env 'USER_PASSWORD'
+if [ -z "$USER_PASSWORD" ]; then
+    echo >&2 '  You need to specify USER_PASSWORD'
+    exit 1
+else
+    set -- "--sensoric.security.user.password=$USER_PASSWORD" "$@"
+fi
+
+file_env 'MANAGER_PASSWORD'
+if [ -z "$MANAGER_PASSWORD" ]; then
+    echo >&2 '  You need to specify MANAGER_PASSWORD'
+    exit 1
+else
+    set -- "--sensoric.security.manager.password=$MANAGER_PASSWORD" "$@"
 fi
 
 set -- java $JAVA_OPTS -jar $ARTIFACT_NAME "$@"
