@@ -19,3 +19,21 @@ docker run --name sensoric-configuration-service -p38888:38888 \
     --encrypt.key-store.secret=************ \
     --sensoric.security.user.password={noop|bcrypt}************ \
     --sensoric.security.manager.password={noop|bcrypt}************
+
+docker service create \
+--replicas 1 \
+--name sensoric-configuration-service \
+--env KEYSTORE_PASSWORD_FILE=/run/secrets/sensoric-configuration-service-keystore-password \
+--env KEYSTORE_SECRET_FILE=/run/secrets/sensoric-configuration-service-keystore-secret \
+--limit-cpu 1 \
+--limit-memory 256mb \
+--network sensoric \
+--secret sensoric-configuration-service.jks \
+--secret sensoric-configuration-service-keystore-password \
+--secret sensoric-configuration-service-keystore-secret \
+sonsoric/configuration-service:latest \
+--spring.profiles.active=production \
+--encrypt.key-store.location=file:///run/secrets/sensoric-configuration-service.jks \
+ --encrypt.key-store.alias=sensoric-configuration-service \
+--sensoric.security.user.password={bcrypt}$2a$10$3ifR5DRD6d.YZUOm9PtOUeQsJBLU6v7l7.OWdw3oJomc/9tneoUnW
+--sensoric.security.manager.password= {bcrypt}$2a$10$CsWcA.B3Xq19hLrJ14R97.b7FA99pE9vKvCt0TwJq.fc7OQtezbwO
