@@ -25,15 +25,17 @@ docker service create \
 --name sensoric-configuration-service \
 --env KEYSTORE_PASSWORD_FILE=/run/secrets/sensoric-configuration-service-keystore-password \
 --env KEYSTORE_SECRET_FILE=/run/secrets/sensoric-configuration-service-keystore-secret \
+--env JAVA_OPTS=-Xmx256m \
 --limit-cpu 1 \
---limit-memory 256mb \
+--limit-memory 512mb \
+--publish 38888:38888 \
 --network sensoric \
 --secret sensoric-configuration-service.jks \
 --secret sensoric-configuration-service-keystore-password \
 --secret sensoric-configuration-service-keystore-secret \
-sensoric/configuration-service:latest \
+com.sensoric/sensoric-configuration-service:latest \
 --spring.profiles.active=production \
 --encrypt.key-store.location=file:///run/secrets/sensoric-configuration-service.jks \
  --encrypt.key-store.alias=sensoric-configuration-service \
---sensoric.security.user.password={bcrypt}$2a$10$3ifR5DRD6d.YZUOm9PtOUeQsJBLU6v7l7.OWdw3oJomc/9tneoUnW
---sensoric.security.manager.password= {bcrypt}$2a$10$CsWcA.B3Xq19hLrJ14R97.b7FA99pE9vKvCt0TwJq.fc7OQtezbwO
+--sensoric.security.user.password={bcrypt}$2a$10$3ifR5DRD6d.YZUOm9PtOUeQsJBLU6v7l7.OWdw3oJomc/9tneoUnW \
+--sensoric.security.manager.password={bcrypt}$2a$10$CsWcA.B3Xq19hLrJ14R97.b7FA99pE9vKvCt0TwJq.fc7OQtezbwO
