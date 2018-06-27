@@ -31,7 +31,7 @@ docker service create \
 --secret sensoric-configuration-service.jks \
 --secret sensoric-configuration-service-keystore-password \
 --secret sensoric-configuration-service-keystore-secret \
-sonsoric/configuration-service:latest \
+sensoric/configuration-service:latest \
 --spring.profiles.active=production \
 --encrypt.key-store.location=file:///run/secrets/sensoric-configuration-service.jks \
  --encrypt.key-store.alias=sensoric-configuration-service \
