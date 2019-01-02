@@ -42,4 +42,3 @@ docker {
 	files jar.archivePath, 'docker-entrypoint.sh'
 	buildArgs(['JAR_FILE': "${jar.archiveName}"])
 }
-
