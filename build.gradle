@@ -26,7 +26,6 @@ dependencies {
 	compile 'org.springframework.cloud:spring-cloud-config-server'
 }
 
-
 dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.4'
 
