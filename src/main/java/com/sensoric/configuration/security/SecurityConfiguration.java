@@ -31,7 +31,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public UserDetailsService userDetailsService(SecurityProperties properties) {
+	protected UserDetailsService userDetailsService(SecurityProperties properties) {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 		properties.getUsers()
 				.stream()
